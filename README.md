@@ -117,6 +117,63 @@ const myTool: ToolComponentBinding<{ query: string }, { results: string[] }> = {
 - Ollama (or any OpenAI-compatible API) running locally or remotely
 - A model that supports tool calling
 
+## Agent Patterns
+
+GenUI-CLI is designed for autonomous agents that need visual feedback while running 24/7.
+
+### Autonomous Monitoring
+
+For background monitoring without user interaction:
+
+```tsx
+import { AutonomousMonitor } from "./examples/autonomous-monitoring";
+
+const monitor = new AutonomousMonitor({
+  checkInterval: 30000, // 30 seconds
+  alertThreshold: { cpu: 80, memory: 85, disk: 90 },
+  logPath: "./monitoring.log",
+});
+
+await monitor.start(); // Runs continuously, logs health checks
+```
+
+### Snapshot-Based Reporting
+
+Generate visual reports on demand:
+
+```tsx
+const { GenUIChat } = "@avasis-ai/gen-ui-cli";
+
+// Capture snapshot without rendering to terminal
+const chat = new GenUIChat(config);
+const snapshot = await chat.executeTool("systemStatusTool", {});
+
+// Use snapshot data for alerts, dashboards, or log files
+```
+
+### Batch Processing with Visual Feedback
+
+Process multiple tasks with progress indicators:
+
+```tsx
+import { ProgressBar } from "@avasis-ai/gen-ui-cli/components";
+
+const tasks = ["task1", "task2", "task3"];
+render(
+  <ProgressBar
+    current={0}
+    total={tasks.length}
+    label="Processing"
+  />
+);
+```
+
+### Examples
+
+- [examples/agent-workflow.tsx](examples/agent-workflow.tsx) - Agent status dashboards and task progress
+- [examples/autonomous-monitoring.tsx](examples/autonomous-monitoring.tsx) - 24/7 system monitoring with alerts
+- [examples/demo.tsx](examples/demo.tsx) - Interactive chat with generative UI
+
 ## License
 
 MIT
