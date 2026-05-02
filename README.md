@@ -177,3 +177,7 @@ render(
 ## License
 
 MIT
+
+---
+
+**Building production AI agents?** [SynthCode Pro](https://whop.com/checkout/plan_KspZxhIoW87gd) — 8 neurosymbolic verification gates, model fallback chains, semantic caching, observability. $149 once.
